@@ -2,10 +2,10 @@ name: GithubIsuueToNotion
 description: Github issue to Notion Database
 author: kajirikajiri
 inputs:
-  notion-api-key:
+  notion-internal-api-key:
     description: Integration type is Internal
     required: true
-  database-id:
+  notion-database-page-url:
     description: https://www.notion.so/YOUR_WORKSPACE/database-id?v=...
     required: true
 runs:
