@@ -1,0 +1,13 @@
+name: GithubIsuueToNotion
+description: Github issue to Notion Database
+author: kajirikajiri
+inputs:
+  notion-api-key:
+    description: Integration type is Internal
+    required: true
+  database-id:
+    description: https://www.notion.so/YOUR_WORKSPACE/database-id?v=...
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
