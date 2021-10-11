@@ -9,23 +9,24 @@ inputs:
     description: https://www.notion.so/YOUR_WORKSPACE/database-id?v=...
     required: true
   issue-title:
-    description: ${{ github.event.issue.title }}
+    description: github-event-issue-title
     required: true
   issue-number:
-    description: ${{ github.event.issue.number }}
+    description: github-event-issue-number
     required: true
   issue-state:
-    description: ${{ github.event.issue.state }}
+    description: github-event-issue-state
     required: true
-  issue-tags-url:
-    description: ${{ github.event.issue.tags_url }}
+  issue-labels:
+    description: github-event-issue-labels
     required: true
   issue-url:
-    description: ${{ github.event.issue.html_url }}
+    description: github-event-issue-html_url
     required: true
   number-of-comments:
-    description: ${{ github.event.issue.comments }}
+    description: github-event-issue-comments
     required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
+  env:
