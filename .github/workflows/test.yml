@@ -1,0 +1,20 @@
+name: CI
+on:
+  issues:
+    types: [opened, edited, closed, reopened, deleted]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:      
+      - uses: kajirikajiri/GithubIssueToNotion@v1.0.2
+      - name: Github issue to Notion
+        uses: kajirikajiri/GithubIssueToNotion@v1.0.2
+        with:
+          notion-internal-api-key: ${{ secrets.NOTION_INTERNAL_API_KEY }}
+          notion-database-page-url: ${{ secrets.NOTION_DATABASE_PAGE_URL }}
+          issue-title: ${{ github.event.issue.title }}
+          issue-number: ${{ github.event.issue.number }}
+          issue-state: ${{ github.event.issue.state }}
+          issue-tags-url: ${{ github.event.issue.tags_url }}
+          issue-url: ${{ github.event.issue.html_url }}
+          number-of-comments: ${{ github.event.issue.comments }}
