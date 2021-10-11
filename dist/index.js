@@ -460,17 +460,101 @@ exports.run = void 0;
 const core = __importStar(__webpack_require__(470));
 const run = () => {
     try {
-        const notionApiKey = core.getInput('notion-api-key');
-        const databaseId = core.getInput('database-id');
-        core.info('notionApiKey');
-        core.info('databaseId');
-        core.endGroup();
+        const notionApiKey = core.getInput("notion-internal-api-key");
+        core.info(notionApiKey);
+        const notionDatabaseUrl = core.getInput("notion-database-page-url");
+        console.log(typeof notionDatabaseUrl === "string");
+        if (typeof notionDatabaseUrl === "string") {
+            core.info("yeah");
+            core.info(notionDatabaseUrl.split("/")[4]);
+            core.info("yeah");
+            core.info(notionDatabaseUrl.split("/")[4].split("?")[0]);
+        }
+        core.info(notionDatabaseUrl);
+        const issueTitle = core.getInput("issue-title");
+        core.info("1");
+        core.info(issueTitle);
+        const issueNumber = core.getInput("issue-number");
+        core.info("2");
+        core.info(issueNumber);
+        const issueState = core.getInput("issue-state");
+        core.info("3");
+        core.info(issueState);
+        const issueLabelsJson = core.getInput("issue-labels");
+        core.info("4");
+        core.info(typeof issueLabelsJson);
+        core.info(issueLabelsJson);
+        core.info(`${issueLabelsJson === ""}`);
+        const issueLabels = JSON.parse(issueLabelsJson.length ? issueLabelsJson : "[]");
+        const issueUrl = core.getInput("issue-url");
+        core.info("5");
+        core.info(issueUrl);
+        const numberOfComments = core.getInput("number-of-comments");
+        core.info("6");
+        core.info(numberOfComments);
+        //   const notion = new Client({ auth: notionApiKey });
+        //   if (notionDatabaseId) {
+        //     notion.pages
+        //       .create({
+        //         parent: { database_id: notionDatabaseId },
+        //         properties: getPropertiesFromIssue(
+        //           issueTitle,
+        //           issueNumber,
+        //           issueState,
+        //           numberOfComments,
+        //           issueUrl,
+        //           issueLabels
+        //         ),
+        //       })
+        //       .then(() => {
+        //         core.endGroup();
+        //       })
+        //       .catch((e) => {
+        //         core.error(e);
+        //         core.endGroup();
+        //       });
+        //   } else {
+        //     core.info(
+        //       `notionDatabaseId: {typeof: ${typeof notionDatabaseId}}, {value: ${notionDatabaseId}} `
+        //     );
+        //     core.endGroup();
+        //   }
     }
     catch (error) {
         core.setFailed(error.message);
     }
 };
 exports.run = run;
+// 何をどうやっても返り値の型がnotion.pages.createに受け入れられなかったのでanyを返す
+function getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfComments, issueUrl, issueLabels) {
+    return {
+        Name: {
+            type: "title",
+            title: [{ type: "text", text: { content: issueTitle } }],
+        },
+        "Issue Number": {
+            type: "number",
+            number: Number(issueNumber),
+        },
+        State: {
+            type: "select",
+            select: { name: issueState },
+        },
+        "Number of Comments": {
+            type: "number",
+            number: Number(numberOfComments),
+        },
+        "Issue URL": {
+            type: "url",
+            url: issueUrl,
+        },
+        Labels: {
+            multi_select: issueLabels.map((l) => {
+                name: l.name;
+            }),
+        },
+    };
+}
 
 
 /***/ }),
