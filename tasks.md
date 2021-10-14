@@ -17,4 +17,5 @@ https://octokit.github.io/rest.js/v18#actions
 https://developers.notion.com/reference/page#all-property-values
 # tasks
 - [ ] create issue → notion
+  - [ ] notion-js-sdkによるnotionのpage作成がうまくいかない
 - [ ] update issue → notion
