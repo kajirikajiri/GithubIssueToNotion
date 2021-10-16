@@ -24,14 +24,6 @@ export const run = () => {
       .getInput("notion-database-page-url")
       .split("/")[4]
       ?.split("?")[0];
-    // core.info(`${typeof notionDatabaseUrl === "string"}`);
-    // if (typeof notionDatabaseUrl === "string") {
-    //   core.info("yeah");
-    //   core.info(notionDatabaseUrl.split("/")[4]);
-    //   core.info("yeah");
-    //   core.info(notionDatabaseUrl.split("/")[4]?.split("?")[0]);
-    // }
-    // core.info(notionDatabaseUrl);
     const issueTitle = core.getInput("issue-title");
     core.info("1");
     core.info(issueTitle);
@@ -87,7 +79,6 @@ export const run = () => {
   }
 };
 
-// 何をどうやっても返り値の型がnotion.pages.createに受け入れられなかったのでanyを返す
 function getPropertiesFromIssue(
   issueTitle: string,
   issueNumber: string,
