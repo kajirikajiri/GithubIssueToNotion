@@ -59,7 +59,7 @@ export const run = () => {
     if (notionDatabaseId) {
       notion.pages
         .create({
-          parent: { database_id: notionDatabaseId },
+          parent: { database_id: notionDatabaseId, page_id: notionDatabaseId },
           properties: getPropertiesFromIssue(
             issueTitle,
             issueNumber,
