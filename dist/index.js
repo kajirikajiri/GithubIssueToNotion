@@ -685,7 +685,7 @@ const core = __importStar(__webpack_require__(470));
 const client_1 = __webpack_require__(397);
 const run = () => {
     try {
-        const { issueLabels, issueNumber, issueState, issueTitle, issueUrl, notionApiKey, notionDatabaseId } = getInputList();
+        const { issueLabels, issueNumber, issueState, issueTitle, issueUrl, notionApiKey, notionDatabaseId, } = getInputList();
         const notion = new client_1.Client({ auth: notionApiKey });
         if (notionDatabaseId) {
             notion.pages
