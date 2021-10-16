@@ -23,9 +23,6 @@ inputs:
   issue-url:
     description: github-event-issue-html_url
     required: true
-  number-of-comments:
-    description: github-event-issue-comments
-    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

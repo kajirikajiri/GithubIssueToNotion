@@ -1,4 +1,4 @@
-name: CI
+name: test
 on:
   issues:
     types: [opened, edited, closed, reopened, deleted]
@@ -6,9 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:      
-      - uses: kajirikajiri/GithubIssueToNotion@v1.0.46
+      - uses: kajirikajiri/GithubIssueToNotion@v1.0.47
       - name: Github issue to Notion
-        uses: kajirikajiri/GithubIssueToNotion@v1.0.46
+        uses: kajirikajiri/GithubIssueToNotion@v1.0.47
         with:
           notion-internal-api-key: ${{ secrets.NOTION_INTERNAL_API_KEY }}
           notion-database-page-url: ${{ secrets.NOTION_DATABASE_PAGE_URL }}
@@ -17,4 +17,3 @@ jobs:
           issue-state: ${{ github.event.issue.state }}
           issue-labels: ${{ toJSON(github.event.issue.labels) }}
           issue-url: ${{ github.event.issue.html_url }}
-          number-of-comments: ${{ github.event.issue.comments }}

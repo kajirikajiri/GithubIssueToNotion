@@ -684,40 +684,14 @@ exports.run = void 0;
 const core = __importStar(__webpack_require__(470));
 const client_1 = __webpack_require__(397);
 const run = () => {
-    var _a;
     try {
-        const notionApiKey = core.getInput("notion-internal-api-key");
-        core.info(notionApiKey);
-        const notionDatabaseId = (_a = core
-            .getInput("notion-database-page-url")
-            .split("/")[4]) === null || _a === void 0 ? void 0 : _a.split("?")[0];
-        const issueTitle = core.getInput("issue-title");
-        core.info("1");
-        core.info(issueTitle);
-        const issueNumber = core.getInput("issue-number");
-        core.info("2");
-        core.info(issueNumber);
-        const issueState = core.getInput("issue-state");
-        core.info("3");
-        core.info(issueState);
-        const issueLabelsJson = core.getInput("issue-labels");
-        core.info("4");
-        core.info(typeof issueLabelsJson);
-        core.info(issueLabelsJson);
-        core.info(`${issueLabelsJson === ""}`);
-        const issueLabels = JSON.parse(issueLabelsJson.length ? issueLabelsJson : "[]");
-        const issueUrl = core.getInput("issue-url");
-        core.info("5");
-        core.info(issueUrl);
-        const numberOfComments = core.getInput("number-of-comments");
-        core.info("6");
-        core.info(numberOfComments);
+        const { issueLabels, issueNumber, issueState, issueTitle, issueUrl, notionApiKey, notionDatabaseId } = getInputList();
         const notion = new client_1.Client({ auth: notionApiKey });
         if (notionDatabaseId) {
             notion.pages
                 .create({
                 parent: { database_id: notionDatabaseId },
-                properties: getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfComments, issueUrl, issueLabels),
+                properties: getPropertiesFromIssue(issueTitle, issueNumber, issueState, issueUrl, issueLabels),
             })
                 .then(() => {
                 core.endGroup();
@@ -728,7 +702,6 @@ const run = () => {
             });
         }
         else {
-            core.info(`notionDatabaseId: {typeof: ${typeof notionDatabaseId}}, {value: ${notionDatabaseId}} `);
             core.endGroup();
         }
     }
@@ -737,7 +710,29 @@ const run = () => {
     }
 };
 exports.run = run;
-function getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfComments, issueUrl, issueLabels) {
+function getInputList() {
+    var _a;
+    const notionApiKey = core.getInput("notion-internal-api-key");
+    const notionDatabaseId = (_a = core
+        .getInput("notion-database-page-url")
+        .split("/")[4]) === null || _a === void 0 ? void 0 : _a.split("?")[0];
+    const issueTitle = core.getInput("issue-title");
+    const issueNumber = core.getInput("issue-number");
+    const issueState = core.getInput("issue-state");
+    const issueLabelsJson = core.getInput("issue-labels");
+    const issueLabels = JSON.parse(issueLabelsJson.length ? issueLabelsJson : "[]");
+    const issueUrl = core.getInput("issue-url");
+    return {
+        notionApiKey,
+        notionDatabaseId,
+        issueTitle,
+        issueNumber,
+        issueState,
+        issueLabels,
+        issueUrl,
+    };
+}
+function getPropertiesFromIssue(issueTitle, issueNumber, issueState, issueUrl, issueLabels) {
     return {
         Name: {
             type: "title",
@@ -750,10 +745,6 @@ function getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfCom
         State: {
             type: "select",
             select: { name: issueState },
-        },
-        "Number of Comments": {
-            type: "number",
-            number: Number(numberOfComments),
         },
         "Issue URL": {
             type: "url",
