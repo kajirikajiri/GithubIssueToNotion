@@ -110,7 +110,7 @@ function getPropertiesFromIssue(
     },
     Labels: {
       multi_select: issueLabels.map((l) => {
-        name: l.name;
+        return { name: l.name };
       }),
     },
   };

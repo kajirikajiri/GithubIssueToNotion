@@ -761,7 +761,7 @@ function getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfCom
         },
         Labels: {
             multi_select: issueLabels.map((l) => {
-                name: l.name;
+                return { name: l.name };
             }),
         },
     };
