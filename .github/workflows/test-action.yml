@@ -6,9 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:      
-      - uses: kajirikajiri/GithubIssueToNotion@v1.0.41
+      - uses: kajirikajiri/GithubIssueToNotion@v1.0.42
       - name: Github issue to Notion
-        uses: kajirikajiri/GithubIssueToNotion@v1.0.41
+        uses: kajirikajiri/GithubIssueToNotion@v1.0.42
         with:
           notion-internal-api-key: ${{ secrets.NOTION_INTERNAL_API_KEY }}
           notion-database-page-url: ${{ secrets.NOTION_DATABASE_PAGE_URL }}
