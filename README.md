@@ -1,5 +1,3 @@
-now creating ...
-
 # GithubIssueToNotion
 
 ## Overview
