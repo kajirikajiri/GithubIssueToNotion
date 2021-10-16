@@ -724,7 +724,7 @@ const run = () => {
         if (notionDatabaseId) {
             notion.pages
                 .create({
-                parent: { database_id: notionDatabaseId },
+                parent: { database_id: "c77f194f-8e13-41c5-8ca2-ff83006d7c97" },
                 properties: getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfComments, issueUrl, issueLabels),
             })
                 .then(() => {
