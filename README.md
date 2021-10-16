@@ -4,6 +4,8 @@
 
 Add a row to Notion's database when an issue is created on github.
 
+![](sample.gif)
+
 ## Must
 
 `1. Access the URL and create a NotionDatabase from the template.`
