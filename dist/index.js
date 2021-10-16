@@ -724,7 +724,7 @@ const run = () => {
         if (notionDatabaseId) {
             notion.pages
                 .create({
-                parent: { page_id: notionDatabaseId },
+                parent: { database_id: notionDatabaseId },
                 properties: getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfComments, issueUrl, issueLabels),
             })
                 .then(() => {
@@ -752,27 +752,27 @@ function getPropertiesFromIssue(issueTitle, issueNumber, issueState, numberOfCom
             type: "title",
             title: [{ type: "text", text: { content: issueTitle } }],
         },
-        "Issue Number": {
-            type: "number",
-            number: Number(issueNumber),
-        },
-        State: {
-            type: "select",
-            select: { name: issueState },
-        },
-        "Number of Comments": {
-            type: "number",
-            number: Number(numberOfComments),
-        },
-        "Issue URL": {
-            type: "url",
-            url: issueUrl,
-        },
-        Labels: {
-            multi_select: issueLabels.map((l) => {
-                name: l.name;
-            }),
-        },
+        // "Issue Number": {
+        //   type: "number",
+        //   number: Number(issueNumber),
+        // },
+        // State: {
+        //   type: "select",
+        //   select: { name: issueState },
+        // },
+        // "Number of Comments": {
+        //   type: "number",
+        //   number: Number(numberOfComments),
+        // },
+        // "Issue URL": {
+        //   type: "url",
+        //   url: issueUrl,
+        // },
+        // Labels: {
+        //   multi_select: issueLabels.map((l) => {
+        //     name: l.name;
+        //   }),
+        // },
     };
 }
 
